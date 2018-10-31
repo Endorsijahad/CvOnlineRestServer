@@ -5,21 +5,13 @@
  */
 package com.mii.cvonlinerestserver.models;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  *
@@ -27,80 +19,48 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @Table(name = "detillowongan")
-@XmlRootElement
-@EntityListeners(AuditingEntityListener.class)
-@NamedQueries({
-    @NamedQuery(name = "Detillowongan.findAll", query = "SELECT d FROM Detillowongan d")
-    , @NamedQuery(name = "Detillowongan.findByIdDetillowongan", query = "SELECT d FROM Detillowongan d WHERE d.idDetillowongan = :idDetillowongan")})
-public class Detillowongan implements Serializable {
+public class Detillowongan {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_detillowongan")
-    private Integer idDetillowongan;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idDetillowongan;
+    
     @JoinColumn(name = "id_kandidat", referencedColumnName = "id_kandidat")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Kandidat idKandidat;
+    @ManyToOne
+    private Kandidat kandidat;
+    
     @JoinColumn(name = "id_lowongan", referencedColumnName = "id_lowongan")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Lowongan idLowongan;
+    @ManyToOne
+    private Lowongan lowongan;
 
     public Detillowongan() {
     }
 
-    public Detillowongan(Integer idDetillowongan) {
+    public Detillowongan(Long idDetillowongan) {
         this.idDetillowongan = idDetillowongan;
     }
 
-    public Integer getIdDetillowongan() {
+    public Long getIdDetillowongan() {
         return idDetillowongan;
     }
 
-    public void setIdDetillowongan(Integer idDetillowongan) {
+    public void setIdDetillowongan(Long idDetillowongan) {
         this.idDetillowongan = idDetillowongan;
     }
 
-    public Kandidat getIdKandidat() {
-        return idKandidat;
+    public Kandidat getKandidat() {
+        return kandidat;
     }
 
-    public void setIdKandidat(Kandidat idKandidat) {
-        this.idKandidat = idKandidat;
+    public void setKandidat(Kandidat kandidat) {
+        this.kandidat = kandidat;
     }
 
-    public Lowongan getIdLowongan() {
-        return idLowongan;
+    public Lowongan getLowongan() {
+        return lowongan;
     }
 
-    public void setIdLowongan(Lowongan idLowongan) {
-        this.idLowongan = idLowongan;
+    public void setLowongan(Lowongan lowongan) {
+        this.lowongan = lowongan;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idDetillowongan != null ? idDetillowongan.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Detillowongan)) {
-            return false;
-        }
-        Detillowongan other = (Detillowongan) object;
-        if ((this.idDetillowongan == null && other.idDetillowongan != null) || (this.idDetillowongan != null && !this.idDetillowongan.equals(other.idDetillowongan))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.mii.cvonlinerestserver.models.Detillowongan[ idDetillowongan=" + idDetillowongan + " ]";
-    }
-    
 }

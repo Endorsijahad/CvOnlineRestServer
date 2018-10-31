@@ -5,13 +5,13 @@
  */
 package com.mii.cvonlinerestserver.repository;
 
-import com.mii.cvonlinerestserver.models.Pertanyaan;
+import com.mii.cvonlinerestserver.models.Lain;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Nande
  */
-public interface PertanyaanRepository extends JpaRepository<Pertanyaan, Integer>{
+public interface LainRepository extends JpaRepository<Lain, Integer> {
     
 }

@@ -5,25 +5,16 @@
  */
 package com.mii.cvonlinerestserver.models;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  *
@@ -31,59 +22,41 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @Table(name = "keluarga")
-@XmlRootElement
-@EntityListeners(AuditingEntityListener.class)
-@NamedQueries({
-    @NamedQuery(name = "Keluarga.findAll", query = "SELECT k FROM Keluarga k")
-    , @NamedQuery(name = "Keluarga.findByIdKeluarga", query = "SELECT k FROM Keluarga k WHERE k.idKeluarga = :idKeluarga")
-    , @NamedQuery(name = "Keluarga.findByHubungan", query = "SELECT k FROM Keluarga k WHERE k.hubungan = :hubungan")
-    , @NamedQuery(name = "Keluarga.findByNamaKeluarga", query = "SELECT k FROM Keluarga k WHERE k.namaKeluarga = :namaKeluarga")
-    , @NamedQuery(name = "Keluarga.findByJenisKelamin", query = "SELECT k FROM Keluarga k WHERE k.jenisKelamin = :jenisKelamin")
-    , @NamedQuery(name = "Keluarga.findByTglLahir", query = "SELECT k FROM Keluarga k WHERE k.tglLahir = :tglLahir")
-    , @NamedQuery(name = "Keluarga.findByPendidikan", query = "SELECT k FROM Keluarga k WHERE k.pendidikan = :pendidikan")
-    , @NamedQuery(name = "Keluarga.findByPekerjaan", query = "SELECT k FROM Keluarga k WHERE k.pekerjaan = :pekerjaan")})
-public class Keluarga implements Serializable {
+public class Keluarga {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_keluarga")
-    private Integer idKeluarga;
-    @Size(max = 7)
-    @Column(name = "hubungan")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idKeluarga;
+
     private String hubungan;
-    @Size(max = 40)
-    @Column(name = "nama_keluarga")
+
     private String namaKeluarga;
-    @Size(max = 9)
-    @Column(name = "jenis_kelamin")
+
     private String jenisKelamin;
-    @Column(name = "tgl_lahir")
+
     @Temporal(TemporalType.DATE)
     private Date tglLahir;
-    @Size(max = 10)
-    @Column(name = "pendidikan")
+
     private String pendidikan;
-    @Size(max = 50)
-    @Column(name = "pekerjaan")
+
     private String pekerjaan;
+
     @JoinColumn(name = "id_kandidat", referencedColumnName = "id_kandidat")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Kandidat idKandidat;
+    @ManyToOne
+    private Kandidat kandidat;
 
     public Keluarga() {
     }
 
-    public Keluarga(Integer idKeluarga) {
+    public Keluarga(Long idKeluarga) {
         this.idKeluarga = idKeluarga;
     }
 
-    public Integer getIdKeluarga() {
+    public Long getIdKeluarga() {
         return idKeluarga;
     }
 
-    public void setIdKeluarga(Integer idKeluarga) {
+    public void setIdKeluarga(Long idKeluarga) {
         this.idKeluarga = idKeluarga;
     }
 
@@ -135,37 +108,11 @@ public class Keluarga implements Serializable {
         this.pekerjaan = pekerjaan;
     }
 
-    public Kandidat getIdKandidat() {
-        return idKandidat;
+    public Kandidat getKandidat() {
+        return kandidat;
     }
 
-    public void setIdKandidat(Kandidat idKandidat) {
-        this.idKandidat = idKandidat;
+    public void setKandidat(Kandidat kandidat) {
+        this.kandidat = kandidat;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idKeluarga != null ? idKeluarga.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Keluarga)) {
-            return false;
-        }
-        Keluarga other = (Keluarga) object;
-        if ((this.idKeluarga == null && other.idKeluarga != null) || (this.idKeluarga != null && !this.idKeluarga.equals(other.idKeluarga))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.mii.cvonlinerestserver.models.Keluarga[ idKeluarga=" + idKeluarga + " ]";
-    }
-    
 }

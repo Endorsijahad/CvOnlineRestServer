@@ -27,51 +27,52 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/CvOnline")
 public class PertanyaanController {
+
     @Autowired
-	PertanyaanDAO pertanyaanDAO;
-	
-	@PostMapping("/pertanyaans")
-	public Pertanyaan createPertanyaan(@Valid @RequestBody Pertanyaan pertanyaan) {
-		return pertanyaanDAO.save(pertanyaan);
-	}
-	
-	@GetMapping("/pertanyaans")
-	public List<Pertanyaan> getAll(){
-		return pertanyaanDAO.findAll();
-	}
-	
-	@GetMapping("/pertanyaans/{id}")
-	public ResponseEntity<Pertanyaan> getkandidatById(@PathVariable(value="id") Long id){
-		Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
-		
-		if(pertanyaan==null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok().body(pertanyaan);
-	}
-	
-	@PutMapping("/pertanyaans/{id}")
-	public ResponseEntity<Pertanyaan> updateKandidat(@PathVariable(value="id") Long id
-			, @Valid @RequestBody Pertanyaan pertanyaanDetails){
-		Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
-		if(pertanyaan==null) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		pertanyaan.setPertanyaan(pertanyaanDetails.getPertanyaan());
-		
-		Pertanyaan pertanyaanUpdate = pertanyaanDAO.save(pertanyaan);
-		return ResponseEntity.ok().body(pertanyaanUpdate);
-	}
-	
-	@DeleteMapping("/pertanyaans/{id}")
-	public ResponseEntity<Pertanyaan> deleteKandidat(@PathVariable(value="id") Long id){
-		Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
-		if(pertanyaan==null) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		pertanyaanDAO.delete(pertanyaan);
-		return ResponseEntity.ok().build();
-	}
+    PertanyaanDAO pertanyaanDAO;
+
+    @PostMapping("/pertanyaans")
+    public Pertanyaan createPertanyaan(@Valid @RequestBody Pertanyaan pertanyaan) {
+        return pertanyaanDAO.save(pertanyaan);
+    }
+
+    @GetMapping("/pertanyaans")
+    public List<Pertanyaan> getAll() {
+        return pertanyaanDAO.findAll();
+    }
+
+    @GetMapping("/pertanyaans/{id}")
+    public ResponseEntity<Pertanyaan> getkandidatById(@PathVariable(value = "id") Integer id) {
+        Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
+
+        if (pertanyaan == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(pertanyaan);
+    }
+
+    @PutMapping("/pertanyaans/{id}")
+    public ResponseEntity<Pertanyaan> updateKandidat(@PathVariable(value = "id") Integer id,
+            @Valid @RequestBody Pertanyaan pertanyaanDetails) {
+        Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
+        if (pertanyaan == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        pertanyaan.setPertanyaan(pertanyaanDetails.getPertanyaan());
+
+        Pertanyaan pertanyaanUpdate = pertanyaanDAO.save(pertanyaan);
+        return ResponseEntity.ok().body(pertanyaanUpdate);
+    }
+
+    @DeleteMapping("/pertanyaans/{id}")
+    public ResponseEntity<Pertanyaan> deleteKandidat(@PathVariable(value = "id") Integer id) {
+        Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
+        if (pertanyaan == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        pertanyaanDAO.delete(pertanyaan);
+        return ResponseEntity.ok().build();
+    }
 }
