@@ -1,7 +1,7 @@
 package com.mii.cvonlinerestserver.controller;
 
-import com.mii.cvonlinerestserver.dao.BahasaDAO;
-import com.mii.cvonlinerestserver.models.Bahasa;
+import com.mii.cvonlinerestserver.dao.LowonganDAO;
+import com.mii.cvonlinerestserver.models.Lowongan;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,52 +22,52 @@ import org.springframework.web.bind.annotation.RestController;
 public class LowonganController {
 
     @Autowired
-    BahasaDAO bahasaDAO;
+    LowonganDAO lowonganDAO;
 
-    @PostMapping("/bahasa")
-    public Bahasa createBahasa(@Valid @RequestBody Bahasa bahasa) {
-        return bahasaDAO.save(bahasa);
+    @PostMapping("/lowongan")
+    public Lowongan createLowongan(@Valid @RequestBody Lowongan lowongan) {
+        return lowonganDAO.save(lowongan);
     }
 
-    @GetMapping("/bahasa")
-    public List<Bahasa> getAll() {
-        return bahasaDAO.findAll();
+    @GetMapping("/lowongan")
+    public List<Lowongan> getAll() {
+        return lowonganDAO.findAll();
     }
 
-    @GetMapping("/bahasa/{id}")
-    public ResponseEntity<Bahasa> getBahasaById(@PathVariable(value = "id") Long id) {
-        Bahasa bahasa = bahasaDAO.findOne(id);
+    @GetMapping("/lowongan/{id}")
+    public ResponseEntity<Lowongan> getLowonganById(@PathVariable(value = "id") Long id) {
+        Lowongan lowongan = lowonganDAO.findOne(id);
 
-        if (bahasa == null) {
+        if (lowongan == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().body(bahasa);
+        return ResponseEntity.ok().body(lowongan);
     }
 
-    @PutMapping("/bahasa/{id}")
-    public ResponseEntity<Bahasa> updateBahasa(@PathVariable(value = "id") Long id,
-             @Valid @RequestBody Bahasa bahasaDetails) {
-        Bahasa bahasa = bahasaDAO.findOne(id);
-        if (bahasa == null) {
+    @PutMapping("/lowongan/{id}")
+    public ResponseEntity<Lowongan> updateLowongan(@PathVariable(value = "id") Long id,
+             @Valid @RequestBody Lowongan lowonganDetails) {
+        Lowongan lowongan = lowonganDAO.findOne(id);
+        if (lowongan == null) {
             return ResponseEntity.notFound().build();
         }
 
-        bahasa.setNamaBahasa(bahasaDetails.getNamaBahasa());
-        bahasa.setSpeaking(bahasaDetails.getSpeaking());
-        bahasa.setReading(bahasaDetails.getReading());
-        bahasa.setWriting(bahasaDetails.getWriting());
+        lowongan.setNamaPosisi(lowonganDetails.getNamaPosisi());
+        lowongan.setSyarat(lowonganDetails.getSyarat());
+        lowongan.setBatasAkhir(lowonganDetails.getBatasAkhir());
+        
 
-        Bahasa bahasaUpdate = bahasaDAO.save(bahasa);
-        return ResponseEntity.ok().body(bahasaUpdate);
+        Lowongan lowonganUpdate = lowonganDAO.save(lowongan);
+        return ResponseEntity.ok().body(lowonganUpdate);
     }
 
-    @DeleteMapping("/bahasa/{id}")
-    public ResponseEntity<Bahasa> deleteBahasa(@PathVariable(value = "id") Long id) {
-        Bahasa bahasa = bahasaDAO.findOne(id);
-        if (bahasa == null) {
+    @DeleteMapping("/lowongan/{id}")
+    public ResponseEntity<Lowongan> deleteLowongan(@PathVariable(value = "id") Long id) {
+        Lowongan lowongan = lowonganDAO.findOne(id);
+        if (lowongan == null) {
             return ResponseEntity.notFound().build();
         }
-        bahasaDAO.delete(bahasa);
+        lowonganDAO.delete(lowongan);
         return ResponseEntity.ok().build();
     }
 
