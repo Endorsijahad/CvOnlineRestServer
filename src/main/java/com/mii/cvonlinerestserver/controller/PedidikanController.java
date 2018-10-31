@@ -19,60 +19,59 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/home")
 public class PedidikanController {
-	
-	@Autowired
-	PendidikanDAO pendidikanDAO;
-	
-	@PostMapping("/pendidikan")
-	  public Pendidikan createPendidikan(@Valid @RequestBody Pendidikan pendidikan) {
-	    return pendidikanDAO.save(pendidikan);
-	  }
-	  
-	  @GetMapping("/pendidikan")
-	  public List<Pendidikan> getAll(){
-	    return pendidikanDAO.findAll();
-	  }
-	  
-	  @GetMapping("/pendidikan/{id}")
-	  public ResponseEntity<Pendidikan> getPendidikanById(@PathVariable(value="id") Long id){
-	    Pendidikan pendidikan = pendidikanDAO.findOne(id);
-	    
-	    if(pendidikan==null) {
-	      return ResponseEntity.notFound().build();
-	    }
-	    return ResponseEntity.ok().body(pendidikan);
-	  }
-	
-	@PutMapping("/pendidikan/{id}")
-	  public ResponseEntity<Pendidikan> updatePendidikan(@PathVariable(value="id") Long id
-	      , @Valid @RequestBody Pendidikan pendidikanDetails){
-	    Pendidikan pendidikan = pendidikanDAO.findOne(id);
-	    if(pendidikan==null) {
-	      return ResponseEntity.notFound().build();
-	    }
-	    
-	    pendidikan.setJenjangPendidikan(pendidikanDetails.getJenjangPendidikan());
-            pendidikan.setNamaSekolah(pendidikanDetails.getNamaSekolah());
-            pendidikan.setNilaiAkhir(pendidikanDetails.getNilaiAkhir());
-            pendidikan.setTahunMasuk(pendidikanDetails.getTahunMasuk());
-            pendidikan.setTahunSelesai(pendidikanDetails.getTahunSelesai());
-            pendidikan.setKandidat(pendidikanDetails.getKandidat());
-	    Pendidikan pendidikanUpdate =  pendidikanDAO.save(pendidikan);
-	    return ResponseEntity.ok().body(pendidikanUpdate);
-	  }
-	  
-	  @DeleteMapping("/pendidikan/{id}")
-	  public ResponseEntity<Pendidikan> deletePendidikan(@PathVariable(value="id") Long id){
-		Pendidikan pendidikan = pendidikanDAO.findOne(id);
-		if(pendidikan==null) {
-			return ResponseEntity.notFound().build();
-		}
-		pendidikanDAO.delete(pendidikan);
-		return ResponseEntity.ok().build();
-	  }
-	
+
+    @Autowired
+    PendidikanDAO pendidikanDAO;
+
+    @PostMapping("/pendidikan")
+    public Pendidikan createPendidikan(@Valid @RequestBody Pendidikan pendidikan) {
+        return pendidikanDAO.save(pendidikan);
+    }
+
+    @GetMapping("/pendidikan")
+    public List<Pendidikan> getAll() {
+        return pendidikanDAO.findAll();
+    }
+
+    @GetMapping("/pendidikan/{id}")
+    public ResponseEntity<Pendidikan> getPendidikanById(@PathVariable(value = "id") Long id) {
+        Pendidikan pendidikan = pendidikanDAO.findOne(id);
+
+        if (pendidikan == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(pendidikan);
+    }
+
+    @PutMapping("/pendidikan/{id}")
+    public ResponseEntity<Pendidikan> updatePendidikan(@PathVariable(value = "id") Long id,
+             @Valid @RequestBody Pendidikan pendidikanDetails) {
+        Pendidikan pendidikan = pendidikanDAO.findOne(id);
+        if (pendidikan == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        pendidikan.setJenjangPendidikan(pendidikanDetails.getJenjangPendidikan());
+        pendidikan.setNamaSekolah(pendidikanDetails.getNamaSekolah());
+        pendidikan.setNilaiAkhir(pendidikanDetails.getNilaiAkhir());
+        pendidikan.setTahunMasuk(pendidikanDetails.getTahunMasuk());
+        pendidikan.setTahunSelesai(pendidikanDetails.getTahunSelesai());
+        pendidikan.setKandidat(pendidikanDetails.getKandidat());
+        Pendidikan pendidikanUpdate = pendidikanDAO.save(pendidikan);
+        return ResponseEntity.ok().body(pendidikanUpdate);
+    }
+
+    @DeleteMapping("/pendidikan/{id}")
+    public ResponseEntity<Pendidikan> deletePendidikan(@PathVariable(value = "id") Long id) {
+        Pendidikan pendidikan = pendidikanDAO.findOne(id);
+        if (pendidikan == null) {
+            return ResponseEntity.notFound().build();
+        }
+        pendidikanDAO.delete(pendidikan);
+        return ResponseEntity.ok().build();
+    }
+
 }

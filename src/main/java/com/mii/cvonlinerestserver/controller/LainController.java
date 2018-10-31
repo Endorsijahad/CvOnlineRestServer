@@ -27,43 +27,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/CvOnline")
 public class LainController {
-    
+
     @Autowired
     LainDAO lainDAO;
-    
-    @PostMapping("/lains")
-	public Lain createLain(@Valid @RequestBody Lain lain) {
-		return lainDAO.save(lain);
-	}
-	
-	@GetMapping("/lains")
-	public List<Lain> getAll(){
-		return lainDAO.findAll();
-	}
-	
-	@GetMapping("/lains/{id}")
-	public ResponseEntity<Lain> getLainById(@PathVariable(value="id") Long id){
-		Lain lain = lainDAO.findOne(id);
-		
-		if(lain==null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok().body(lain);
-	}
-	
-	@PutMapping("/lains/{id}")
-	public ResponseEntity<Lain> updateLain(@PathVariable(value="id") Long id
-			, @Valid @RequestBody Lain lainDetails){
-		Lain lain = lainDAO.findOne(id);
-		if(lain==null) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		lain.setPertanyaan(lainDetails.getPertanyaan());
-                lain.setKandidat(lainDetails.getKandidat());
-		lain.setJawaban(lainDetails.getJawaban());
-                
-		Lain lainUpdate = lainDAO.save(lain);
-		return ResponseEntity.ok().body(lainUpdate);
-	}
+
+    @PostMapping("/lain")
+    public Lain createLain(@Valid @RequestBody Lain lain) {
+        return lainDAO.save(lain);
+    }
+
+    @GetMapping("/lain")
+    public List<Lain> getAll() {
+        return lainDAO.findAll();
+    }
+
+    @GetMapping("/lain/{id}")
+    public ResponseEntity<Lain> getLainById(@PathVariable(value = "id") Long id) {
+        Lain lain = lainDAO.findOne(id);
+
+        if (lain == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(lain);
+    }
+
+    @PutMapping("/lain/{id}")
+    public ResponseEntity<Lain> updateLain(@PathVariable(value = "id") Long id,
+             @Valid @RequestBody Lain lainDetails) {
+        Lain lain = lainDAO.findOne(id);
+        if (lain == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        lain.setPertanyaan(lainDetails.getPertanyaan());
+        lain.setKandidat(lainDetails.getKandidat());
+        lain.setJawaban(lainDetails.getJawaban());
+
+        Lain lainUpdate = lainDAO.save(lain);
+        return ResponseEntity.ok().body(lainUpdate);
+    }
 }

@@ -23,53 +23,52 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/home")
 public class OrganisasiController {
-    
-    @Autowired
-	   OrganisasiDAO organisasiDAO;
-	
-	@PostMapping("/organisasi")
-	  public Organisasi createOrganisasi(@Valid @RequestBody Organisasi organisasi) {
-	    return organisasiDAO.save(organisasi);
-	  }
-	  
-	  @GetMapping("/organisasi")
-	  public List<Organisasi> getAll(){
-	    return organisasiDAO.findAll();
-	  }
-	  
-	  @GetMapping("/organisasi/{id}")
-	  public ResponseEntity<Organisasi> getOrganisasiById(@PathVariable(value="id") Long id){
-	    Organisasi organisasi = organisasiDAO.findOne(id);
-	    
-	    if(organisasi==null) {
-	      return ResponseEntity.notFound().build();
-	    }
-	    return ResponseEntity.ok().body(organisasi);
-	  }
-	
-	@PutMapping("/organisasi/{id}")
-	  public ResponseEntity<Organisasi> updateOrganisasi(@PathVariable(value="id") Long id
-	      , @Valid @RequestBody Organisasi organisasiDetails){
-	    Organisasi organisasi = organisasiDAO.findOne(id);
-	    if(organisasi==null) {
-	      return ResponseEntity.notFound().build();
-	    }
-	    
-	    organisasi.setNamaOrganisasi(organisasiDetails.getNamaOrganisasi());
-	    organisasi.setKandidat(organisasiDetails.getKandidat());
-	 
 
-	    Organisasi organisasiUpdate =  organisasiDAO.save(organisasi);
-	    return ResponseEntity.ok().body(organisasiUpdate);
-	  }
-	  
-	  @DeleteMapping("/organisasi/{id}")
-	  public ResponseEntity<Organisasi> deleteOrganisasi(@PathVariable(value="id") Long id){
-		Organisasi organisasi = organisasiDAO.findOne(id);
-		if(organisasi==null) {
-			return ResponseEntity.notFound().build();
-		}
-		organisasiDAO.delete(organisasi);
-		return ResponseEntity.ok().build();
-	  }
+    @Autowired
+    OrganisasiDAO organisasiDAO;
+
+    @PostMapping("/organisasi")
+    public Organisasi createOrganisasi(@Valid @RequestBody Organisasi organisasi) {
+        return organisasiDAO.save(organisasi);
+    }
+
+    @GetMapping("/organisasi")
+    public List<Organisasi> getAll() {
+        return organisasiDAO.findAll();
+    }
+
+    @GetMapping("/organisasi/{id}")
+    public ResponseEntity<Organisasi> getOrganisasiById(@PathVariable(value = "id") Long id) {
+        Organisasi organisasi = organisasiDAO.findOne(id);
+
+        if (organisasi == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(organisasi);
+    }
+
+    @PutMapping("/organisasi/{id}")
+    public ResponseEntity<Organisasi> updateOrganisasi(@PathVariable(value = "id") Long id,
+             @Valid @RequestBody Organisasi organisasiDetails) {
+        Organisasi organisasi = organisasiDAO.findOne(id);
+        if (organisasi == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        organisasi.setNamaOrganisasi(organisasiDetails.getNamaOrganisasi());
+        organisasi.setKandidat(organisasiDetails.getKandidat());
+
+        Organisasi organisasiUpdate = organisasiDAO.save(organisasi);
+        return ResponseEntity.ok().body(organisasiUpdate);
+    }
+
+    @DeleteMapping("/organisasi/{id}")
+    public ResponseEntity<Organisasi> deleteOrganisasi(@PathVariable(value = "id") Long id) {
+        Organisasi organisasi = organisasiDAO.findOne(id);
+        if (organisasi == null) {
+            return ResponseEntity.notFound().build();
+        }
+        organisasiDAO.delete(organisasi);
+        return ResponseEntity.ok().build();
+    }
 }
