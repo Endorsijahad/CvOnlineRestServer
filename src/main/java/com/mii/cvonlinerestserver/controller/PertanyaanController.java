@@ -31,17 +31,17 @@ public class PertanyaanController {
     @Autowired
     PertanyaanDAO pertanyaanDAO;
 
-    @PostMapping("/pertanyaans")
+    @PostMapping("/pertanyaan")
     public Pertanyaan createPertanyaan(@Valid @RequestBody Pertanyaan pertanyaan) {
         return pertanyaanDAO.save(pertanyaan);
     }
 
-    @GetMapping("/pertanyaans")
+    @GetMapping("/pertanyaan")
     public List<Pertanyaan> getAll() {
         return pertanyaanDAO.findAll();
     }
 
-    @GetMapping("/pertanyaans/{id}")
+    @GetMapping("/pertanyaan/{id}")
     public ResponseEntity<Pertanyaan> getkandidatById(@PathVariable(value = "id") Long id) {
         Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
 
@@ -51,7 +51,7 @@ public class PertanyaanController {
         return ResponseEntity.ok().body(pertanyaan);
     }
 
-    @PutMapping("/pertanyaans/{id}")
+    @PutMapping("/pertanyaan/{id}")
     public ResponseEntity<Pertanyaan> updateKandidat(@PathVariable(value = "id") Long id,
             @Valid @RequestBody Pertanyaan pertanyaanDetails) {
         Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
@@ -65,7 +65,7 @@ public class PertanyaanController {
         return ResponseEntity.ok().body(pertanyaanUpdate);
     }
 
-    @DeleteMapping("/pertanyaans/{id}")
+    @DeleteMapping("/pertanyaan/{id}")
     public ResponseEntity<Pertanyaan> deleteKandidat(@PathVariable(value = "id") Long id) {
         Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
         if (pertanyaan == null) {
