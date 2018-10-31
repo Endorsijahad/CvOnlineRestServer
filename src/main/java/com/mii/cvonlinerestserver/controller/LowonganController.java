@@ -1,7 +1,7 @@
 package com.mii.cvonlinerestserver.controller;
 
-import com.mii.cvonlinerestserver.dao.BahasaDAO;
-import com.mii.cvonlinerestserver.models.Bahasa;
+import com.mii.cvonlinerestserver.dao.LowonganDAO;
+import com.mii.cvonlinerestserver.models.Lowongan;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,59 +17,58 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/home")
 public class LowonganController {
-	
-	@Autowired
-	BahasaDAO bahasaDAO;
-	
-	@PostMapping("/bahasa")
-	  public Bahasa createBahasa(@Valid @RequestBody Bahasa bahasa) {
-	    return bahasaDAO.save(bahasa);
-	  }
-	  
-	  @GetMapping("/bahasa")
-	  public List<Bahasa> getAll(){
-	    return bahasaDAO.findAll();
-	  }
-	  
-	  @GetMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> getBahasaById(@PathVariable(value="id") Integer id){
-	    Bahasa bahasa = bahasaDAO.findOne(id);
-	    
-	    if(bahasa==null) {
-	      return ResponseEntity.notFound().build();
-	    }
-	    return ResponseEntity.ok().body(bahasa);
-	  }
-	
-	@PutMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> updateBahasa(@PathVariable(value="id") Integer id
-	      , @Valid @RequestBody Bahasa bahasaDetails){
-	    Bahasa bahasa = bahasaDAO.findOne(id);
-	    if(bahasa==null) {
-	      return ResponseEntity.notFound().build();
-	    }
-	    
-	    bahasa.setNamaBahasa(bahasaDetails.getNamaBahasa());
-	    bahasa.setSpeaking(bahasaDetails.getSpeaking());
-	    bahasa.setReading(bahasaDetails.getReading());
-	    bahasa.setWriting(bahasaDetails.getWriting());
 
-	    Bahasa bahasaUpdate =  bahasaDAO.save(bahasa);
-	    return ResponseEntity.ok().body(bahasaUpdate);
-	  }
-	  
-	  @DeleteMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> deleteBahasa(@PathVariable(value="id") Integer id){
-		Bahasa bahasa = bahasaDAO.findOne(id);
-		if(bahasa==null) {
-			return ResponseEntity.notFound().build();
-		}
-		bahasaDAO.delete(bahasa);
-		return ResponseEntity.ok().build();
-	  }
-	
+    @Autowired
+    LowonganDAO lowonganDAO;
+
+    @PostMapping("/lowongan")
+    public Lowongan createLowongan(@Valid @RequestBody Lowongan lowongan) {
+        return lowonganDAO.save(lowongan);
+    }
+
+    @GetMapping("/lowongan")
+    public List<Lowongan> getAll() {
+        return lowonganDAO.findAll();
+    }
+
+    @GetMapping("/lowongan/{id}")
+    public ResponseEntity<Lowongan> getLowonganById(@PathVariable(value = "id") Long id) {
+        Lowongan lowongan = lowonganDAO.findOne(id);
+
+        if (lowongan == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(lowongan);
+    }
+
+    @PutMapping("/lowongan/{id}")
+    public ResponseEntity<Lowongan> updateLowongan(@PathVariable(value = "id") Long id,
+             @Valid @RequestBody Lowongan lowonganDetails) {
+        Lowongan lowongan = lowonganDAO.findOne(id);
+        if (lowongan == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        lowongan.setNamaPosisi(lowonganDetails.getNamaPosisi());
+        lowongan.setSyarat(lowonganDetails.getSyarat());
+        lowongan.setBatasAkhir(lowonganDetails.getBatasAkhir());
+        
+
+        Lowongan lowonganUpdate = lowonganDAO.save(lowongan);
+        return ResponseEntity.ok().body(lowonganUpdate);
+    }
+
+    @DeleteMapping("/lowongan/{id}")
+    public ResponseEntity<Lowongan> deleteLowongan(@PathVariable(value = "id") Long id) {
+        Lowongan lowongan = lowonganDAO.findOne(id);
+        if (lowongan == null) {
+            return ResponseEntity.notFound().build();
+        }
+        lowonganDAO.delete(lowongan);
+        return ResponseEntity.ok().build();
+    }
+
 }

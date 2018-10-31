@@ -26,7 +26,7 @@ public class LowonganDAO {
 		return lowonganRepository.findAll();
 	}
 	
-	public Lowongan findOne(Long id) {
+	public Lowongan findOne(Integer id) {
 		return lowonganRepository.findOne(id);
 	}
 	
