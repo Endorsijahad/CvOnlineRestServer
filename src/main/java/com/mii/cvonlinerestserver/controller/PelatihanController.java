@@ -1,7 +1,7 @@
 package com.mii.cvonlinerestserver.controller;
 
-import com.mii.cvonlinerestserver.dao.BahasaDAO;
-import com.mii.cvonlinerestserver.models.Bahasa;
+import com.mii.cvonlinerestserver.dao.PelatihanDAO;
+import com.mii.cvonlinerestserver.models.Pelatihan;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,57 +18,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/home")
+@RequestMapping("/CvOnline")
 public class PelatihanController {
+	
+	@Autowired
+	PelatihanDAO pelatihanDAO;
+	
+	@PostMapping("/pelatihan")
+	  public Pelatihan createPelatihan(@Valid @RequestBody Pelatihan pelatihan) {
+	    return pelatihanDAO.save(pelatihan);
+	  }
+	  
+	  @GetMapping("/pelatihan")
+	  public List<Pelatihan> getAll(){
+	    return pelatihanDAO.findAll();
+	  }
+	  
+	  @GetMapping("/pelatihan/{id}")
+	  public ResponseEntity<Pelatihan> getPelatihanById(@PathVariable(value="id") Long id){
+	    Pelatihan pelatihan = pelatihanDAO.findOne(id);
+	    
+	    if(pelatihan==null) {
+	      return ResponseEntity.notFound().build();
+	    }
+	    return ResponseEntity.ok().body(pelatihan);
+	  }
+	
+	@PutMapping("/pelatihan/{id}")
+	  public ResponseEntity<Pelatihan> updatePelatihan(@PathVariable(value="id") Long id
+	      , @Valid @RequestBody Pelatihan pelatihanDetails){
+	    Pelatihan pelatihan = pelatihanDAO.findOne(id);
+	    if(pelatihan==null) {
+	      return ResponseEntity.notFound().build();
+	    }
+	    
+	    pelatihan.setNamaPelatihan(pelatihanDetails.getNamaPelatihan());
+	    pelatihan.setLembaga(pelatihanDetails.getLembaga());
+	    pelatihan.setSertifikat(pelatihanDetails.getSertifikat());
+	    pelatihan.setTglPelatihan(pelatihanDetails.getTglPelatihan());
 
-    @Autowired
-    BahasaDAO bahasaDAO;
-
-    @PostMapping("/bahasa")
-    public Bahasa createBahasa(@Valid @RequestBody Bahasa bahasa) {
-        return bahasaDAO.save(bahasa);
-    }
-
-    @GetMapping("/bahasa")
-    public List<Bahasa> getAll() {
-        return bahasaDAO.findAll();
-    }
-
-    @GetMapping("/bahasa/{id}")
-    public ResponseEntity<Bahasa> getBahasaById(@PathVariable(value = "id") Long id) {
-        Bahasa bahasa = bahasaDAO.findOne(id);
-
-        if (bahasa == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(bahasa);
-    }
-
-    @PutMapping("/bahasa/{id}")
-    public ResponseEntity<Bahasa> updateBahasa(@PathVariable(value = "id") Long id,
-             @Valid @RequestBody Bahasa bahasaDetails) {
-        Bahasa bahasa = bahasaDAO.findOne(id);
-        if (bahasa == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        bahasa.setNamaBahasa(bahasaDetails.getNamaBahasa());
-        bahasa.setSpeaking(bahasaDetails.getSpeaking());
-        bahasa.setReading(bahasaDetails.getReading());
-        bahasa.setWriting(bahasaDetails.getWriting());
-
-        Bahasa bahasaUpdate = bahasaDAO.save(bahasa);
-        return ResponseEntity.ok().body(bahasaUpdate);
-    }
-
-    @DeleteMapping("/bahasa/{id}")
-    public ResponseEntity<Bahasa> deleteBahasa(@PathVariable(value = "id") Long id) {
-        Bahasa bahasa = bahasaDAO.findOne(id);
-        if (bahasa == null) {
-            return ResponseEntity.notFound().build();
-        }
-        bahasaDAO.delete(bahasa);
-        return ResponseEntity.ok().build();
-    }
-
+	    Pelatihan pelatihanUpdate =  pelatihanDAO.save(pelatihan);
+	    return ResponseEntity.ok().body(pelatihanUpdate);
+	  }
+	  
+	  @DeleteMapping("/pelatihan/{id}")
+	  public ResponseEntity<Pelatihan> deletePelatihan(@PathVariable(value="id") Long id){
+		Pelatihan pelatihan = pelatihanDAO.findOne(id);
+		if(pelatihan==null) {
+			return ResponseEntity.notFound().build();
+		}
+		pelatihanDAO.delete(pelatihan);
+		return ResponseEntity.ok().build();
+	  }
+	
 }

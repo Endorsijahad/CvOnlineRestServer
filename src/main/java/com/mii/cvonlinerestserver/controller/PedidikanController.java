@@ -1,8 +1,6 @@
 package com.mii.cvonlinerestserver.controller;
 
-import com.mii.cvonlinerestserver.dao.BahasaDAO;
 import com.mii.cvonlinerestserver.dao.PendidikanDAO;
-import com.mii.cvonlinerestserver.models.Bahasa;
 import com.mii.cvonlinerestserver.models.Pendidikan;
 import java.util.List;
 
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/home")
+@RequestMapping("/CvOnline")
 public class PedidikanController {
 
     @Autowired
