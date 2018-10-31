@@ -24,7 +24,7 @@ public class BahasaDAO {
 		return bahasaRepository.findAll();
 	}
 	
-	public Bahasa findOne(Integer id) {
+	public Bahasa findOne(Long id) {
 		return bahasaRepository.findOne(id);
 	}
 	

@@ -38,7 +38,7 @@ public class OrganisasiController {
 	  }
 	  
 	  @GetMapping("/organisasi/{id}")
-	  public ResponseEntity<Organisasi> getOrganisasiById(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Organisasi> getOrganisasiById(@PathVariable(value="id") Long id){
 	    Organisasi organisasi = organisasiDAO.findOne(id);
 	    
 	    if(organisasi==null) {
@@ -48,7 +48,7 @@ public class OrganisasiController {
 	  }
 	
 	@PutMapping("/organisasi/{id}")
-	  public ResponseEntity<Organisasi> updateOrganisasi(@PathVariable(value="id") Integer id
+	  public ResponseEntity<Organisasi> updateOrganisasi(@PathVariable(value="id") Long id
 	      , @Valid @RequestBody Organisasi organisasiDetails){
 	    Organisasi organisasi = organisasiDAO.findOne(id);
 	    if(organisasi==null) {
@@ -56,7 +56,7 @@ public class OrganisasiController {
 	    }
 	    
 	    organisasi.setNamaOrganisasi(organisasiDetails.getNamaOrganisasi());
-	    organisasi.setIdKandidat(organisasiDetails.getIdKandidat());
+	    organisasi.setKandidat(organisasiDetails.getKandidat());
 	 
 
 	    Organisasi organisasiUpdate =  organisasiDAO.save(organisasi);
@@ -64,7 +64,7 @@ public class OrganisasiController {
 	  }
 	  
 	  @DeleteMapping("/organisasi/{id}")
-	  public ResponseEntity<Organisasi> deleteOrganisasi(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Organisasi> deleteOrganisasi(@PathVariable(value="id") Long id){
 		Organisasi organisasi = organisasiDAO.findOne(id);
 		if(organisasi==null) {
 			return ResponseEntity.notFound().build();

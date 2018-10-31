@@ -38,7 +38,7 @@ public class KeahlianController {
 	  }
 	  
 	  @GetMapping("/keahlian/{id}")
-	  public ResponseEntity<Keahlian> getKeahlianById(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Keahlian> getKeahlianById(@PathVariable(value="id") Long id){
 	    Keahlian keahlian = keahlianDAO.findOne(id);
 	    
 	    if(keahlian==null) {
@@ -48,7 +48,7 @@ public class KeahlianController {
 	  }
 	
 	@PutMapping("/keahlian/{id}")
-	  public ResponseEntity<Keahlian> updateKeahlian(@PathVariable(value="id") Integer id
+	  public ResponseEntity<Keahlian> updateKeahlian(@PathVariable(value="id") Long id
 	      , @Valid @RequestBody Keahlian keahlianDetails){
 	    Keahlian keahlian = keahlianDAO.findOne(id);
 	    if(keahlian==null) {
@@ -57,7 +57,7 @@ public class KeahlianController {
 	    
 	    keahlian.setSertifikat(keahlianDetails.getSertifikat());
 	    keahlian.setTglSertifikat(keahlianDetails.getTglSertifikat());
-	    keahlian.setIdKandidat(keahlianDetails.getIdKandidat());
+	    keahlian.setKandidat(keahlianDetails.getKandidat());
 	    keahlian.setDeskripsi(keahlianDetails.getDeskripsi());
 
 	    Keahlian keahlianUpdate =  keahlianDAO.save(keahlian);
@@ -65,7 +65,7 @@ public class KeahlianController {
 	  }
 	  
 	  @DeleteMapping("/keahlian/{id}")
-	  public ResponseEntity<Keahlian> deleteKeahlain(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Keahlian> deleteKeahlain(@PathVariable(value="id") Long id){
 		Keahlian keahlian = keahlianDAO.findOne(id);
 		if(keahlian==null) {
 			return ResponseEntity.notFound().build();

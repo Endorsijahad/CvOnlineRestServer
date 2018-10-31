@@ -1,9 +1,7 @@
 package com.mii.cvonlinerestserver.dao;
 
 import com.mii.cvonlinerestserver.models.Lowongan;
-import com.mii.cvonlinerestserver.models.Pendidikan;
 import com.mii.cvonlinerestserver.repository.LowonganRepository;
-import com.mii.cvonlinerestserver.repository.PendidikanRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class LowonganDAO {
 		return lowonganRepository.findAll();
 	}
 	
-	public Lowongan findOne(Integer id) {
+	public Lowongan findOne(Long id) {
 		return lowonganRepository.findOne(id);
 	}
 	

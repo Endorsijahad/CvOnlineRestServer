@@ -29,7 +29,7 @@ public class LainDAO {
         return lainRepository.findAll();
     }
     
-    public Lain findOne(Integer id){
+    public Lain findOne(Long id){
         return lainRepository.findOne(id);
     }
     

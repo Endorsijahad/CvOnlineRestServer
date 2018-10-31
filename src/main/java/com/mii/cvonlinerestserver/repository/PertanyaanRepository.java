@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Nande
  */
-public interface PertanyaanRepository extends JpaRepository<Pertanyaan, Integer>{
+public interface PertanyaanRepository extends JpaRepository<Pertanyaan, Long>{
     
 }

@@ -36,7 +36,7 @@ public class KandidatController {
 	  }
 	  
 	  @GetMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> getBahasaById(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Bahasa> getBahasaById(@PathVariable(value="id") Long id){
 	    Bahasa bahasa = bahasaDAO.findOne(id);
 	    
 	    if(bahasa==null) {
@@ -46,7 +46,7 @@ public class KandidatController {
 	  }
 	
 	@PutMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> updateBahasa(@PathVariable(value="id") Integer id
+	  public ResponseEntity<Bahasa> updateBahasa(@PathVariable(value="id") Long id
 	      , @Valid @RequestBody Bahasa bahasaDetails){
 	    Bahasa bahasa = bahasaDAO.findOne(id);
 	    if(bahasa==null) {
@@ -63,7 +63,7 @@ public class KandidatController {
 	  }
 	  
 	  @DeleteMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> deleteBahasa(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Bahasa> deleteBahasa(@PathVariable(value="id") Long id){
 		Bahasa bahasa = bahasaDAO.findOne(id);
 		if(bahasa==null) {
 			return ResponseEntity.notFound().build();

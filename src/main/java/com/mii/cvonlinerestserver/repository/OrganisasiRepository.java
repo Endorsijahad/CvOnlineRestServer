@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author USER
  */
-public interface OrganisasiRepository extends JpaRepository<Organisasi, Integer>{
+public interface OrganisasiRepository extends JpaRepository<Organisasi, Long>{
     
 }

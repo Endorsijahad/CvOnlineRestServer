@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author USER
  */
-public interface KeahlianRepository extends JpaRepository<Keahlian, Integer>{
+public interface KeahlianRepository extends JpaRepository<Keahlian, Long>{
     
 }

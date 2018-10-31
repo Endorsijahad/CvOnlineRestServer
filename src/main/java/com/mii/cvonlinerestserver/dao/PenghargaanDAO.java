@@ -25,7 +25,7 @@ public class PenghargaanDAO {
         return penghargaanRepository.findAll();
     }
 
-    public Penghargaan findOne(Integer id) {
+    public Penghargaan findOne(Long id) {
         return penghargaanRepository.findOne(id);
     }
 

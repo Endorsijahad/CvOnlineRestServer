@@ -37,7 +37,7 @@ public class PenghargaanController {
 	  }
 	  
 	  @GetMapping("/penghargaan/{id}")
-	  public ResponseEntity<Penghargaan> getPenghargaanById(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Penghargaan> getPenghargaanById(@PathVariable(value="id") Long id){
 	    Penghargaan penghargaan = penghargaanDAO.findOne(id);
 	    
 	    if(penghargaan==null) {
@@ -47,7 +47,7 @@ public class PenghargaanController {
 	  }
 	
 	@PutMapping("/penghargaan/{id}")
-	  public ResponseEntity<Penghargaan> updatePenghargaan(@PathVariable(value="id") Integer id
+	  public ResponseEntity<Penghargaan> updatePenghargaan(@PathVariable(value="id") Long id
 	      , @Valid @RequestBody Penghargaan penghargaanDetails){
 	    Penghargaan penghargaan = penghargaanDAO.findOne(id);
 	    if(penghargaan==null) {
@@ -55,7 +55,7 @@ public class PenghargaanController {
 	    }
 	    
 	    penghargaan.setNamaPenghargaan(penghargaanDetails.getNamaPenghargaan());
-	    penghargaan.setIdKandidat(penghargaanDetails.getIdKandidat());
+	    penghargaan.setKandidat(penghargaanDetails.getKandidat());
 	 
 
 	    Penghargaan penghargaanUpdate =  penghargaanDAO.save(penghargaan);
@@ -63,7 +63,7 @@ public class PenghargaanController {
 	  }
 	  
 	  @DeleteMapping("/penghargaan/{id}")
-	  public ResponseEntity<Penghargaan> deletePenghargaan(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Penghargaan> deletePenghargaan(@PathVariable(value="id") Long id){
 		Penghargaan penghargaan = penghargaanDAO.findOne(id);
 		if(penghargaan==null) {
 			return ResponseEntity.notFound().build();

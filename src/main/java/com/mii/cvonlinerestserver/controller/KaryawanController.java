@@ -40,7 +40,7 @@ public class KaryawanController {
 	  }
 	  
 	  @GetMapping("/karyawan/{id}")
-	  public ResponseEntity<Karyawan> getKaryawanById(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Karyawan> getKaryawanById(@PathVariable(value="id") Long id){
 	    Karyawan karyawan = karyawanDAO.findOne(id);
 	    
 	    if(karyawan==null) {
@@ -50,7 +50,7 @@ public class KaryawanController {
 	  }
 	
 	@PutMapping("/karyawan/{id}")
-	  public ResponseEntity<Karyawan> updateKaryawan(@PathVariable(value="id") Integer id
+	  public ResponseEntity<Karyawan> updateKaryawan(@PathVariable(value="id") Long id
 	      , @Valid @RequestBody Karyawan karyawanDetails){
 	    Karyawan karyawan = karyawanDAO.findOne(id);
 	    if(karyawan==null) {
@@ -67,7 +67,7 @@ public class KaryawanController {
 	  }
 	  
 	  @DeleteMapping("/karyawan/{id}")
-	  public ResponseEntity<Karyawan> deleteKaryawan(@PathVariable(value="id") Integer id){
+	  public ResponseEntity<Karyawan> deleteKaryawan(@PathVariable(value="id") Long id){
 		Karyawan karyawan = karyawanDAO.findOne(id);
 		if(karyawan==null) {
 			return ResponseEntity.notFound().build();

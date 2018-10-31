@@ -60,7 +60,7 @@ public class PedidikanController {
             pendidikan.setNilaiAkhir(pendidikanDetails.getNilaiAkhir());
             pendidikan.setTahunMasuk(pendidikanDetails.getTahunMasuk());
             pendidikan.setTahunSelesai(pendidikanDetails.getTahunSelesai());
-            pendidikan.setIdKandidat(pendidikanDetails.getIdKandidat());
+            pendidikan.setKandidat(pendidikanDetails.getKandidat());
 	    Pendidikan pendidikanUpdate =  pendidikanDAO.save(pendidikan);
 	    return ResponseEntity.ok().body(pendidikanUpdate);
 	  }

@@ -25,7 +25,7 @@ public class KaryawanDAO {
             return karyawanRepository.findAll();
         }
 
-        public Karyawan findOne(Integer id) {
+        public Karyawan findOne(Long id) {
             return karyawanRepository.findOne(id);
         }
 

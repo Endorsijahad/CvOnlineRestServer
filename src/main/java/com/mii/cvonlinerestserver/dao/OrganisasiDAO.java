@@ -25,7 +25,7 @@ public class OrganisasiDAO {
         return organisasiRepository.findAll();
     }
 
-    public Organisasi findOne(Integer id) {
+    public Organisasi findOne(Long id) {
         return organisasiRepository.findOne(id);
     }
 

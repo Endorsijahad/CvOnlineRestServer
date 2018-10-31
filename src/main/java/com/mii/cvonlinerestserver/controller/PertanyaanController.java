@@ -42,7 +42,7 @@ public class PertanyaanController {
     }
 
     @GetMapping("/pertanyaans/{id}")
-    public ResponseEntity<Pertanyaan> getkandidatById(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<Pertanyaan> getkandidatById(@PathVariable(value = "id") Long id) {
         Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
 
         if (pertanyaan == null) {
@@ -52,7 +52,7 @@ public class PertanyaanController {
     }
 
     @PutMapping("/pertanyaans/{id}")
-    public ResponseEntity<Pertanyaan> updateKandidat(@PathVariable(value = "id") Integer id,
+    public ResponseEntity<Pertanyaan> updateKandidat(@PathVariable(value = "id") Long id,
             @Valid @RequestBody Pertanyaan pertanyaanDetails) {
         Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
         if (pertanyaan == null) {
@@ -66,7 +66,7 @@ public class PertanyaanController {
     }
 
     @DeleteMapping("/pertanyaans/{id}")
-    public ResponseEntity<Pertanyaan> deleteKandidat(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<Pertanyaan> deleteKandidat(@PathVariable(value = "id") Long id) {
         Pertanyaan pertanyaan = pertanyaanDAO.findOne(id);
         if (pertanyaan == null) {
             return ResponseEntity.notFound().build();

@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Nande
  */
-public interface LainRepository extends JpaRepository<Lain, Integer> {
+public interface LainRepository extends JpaRepository<Lain, Long> {
     
 }

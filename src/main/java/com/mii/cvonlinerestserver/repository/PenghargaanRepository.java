@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author USER
  */
-public interface PenghargaanRepository extends JpaRepository<Penghargaan, Integer>{
+public interface PenghargaanRepository extends JpaRepository<Penghargaan, Long>{
     
 }

@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author USER
  */
-public interface KaryawanRepository extends JpaRepository<Karyawan, Integer>{
+public interface KaryawanRepository extends JpaRepository<Karyawan, Long>{
     
 }

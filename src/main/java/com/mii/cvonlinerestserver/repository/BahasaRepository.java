@@ -4,6 +4,6 @@ import com.mii.cvonlinerestserver.models.Bahasa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface BahasaRepository extends JpaRepository<Bahasa, Integer> {
+public interface BahasaRepository extends JpaRepository<Bahasa, Long> {
 
 }

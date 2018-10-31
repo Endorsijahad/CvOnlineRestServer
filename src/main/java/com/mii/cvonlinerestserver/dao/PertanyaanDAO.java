@@ -29,7 +29,7 @@ public class PertanyaanDAO {
         return pertanyaanRepository.findAll();
     }
 
-    public Pertanyaan findOne(Integer id) {
+    public Pertanyaan findOne(Long id) {
         return pertanyaanRepository.findOne(id);
     }
 

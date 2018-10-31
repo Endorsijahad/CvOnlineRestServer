@@ -42,7 +42,7 @@ public class LainController {
 	}
 	
 	@GetMapping("/lains/{id}")
-	public ResponseEntity<Lain> getLainById(@PathVariable(value="id") Integer id){
+	public ResponseEntity<Lain> getLainById(@PathVariable(value="id") Long id){
 		Lain lain = lainDAO.findOne(id);
 		
 		if(lain==null) {
@@ -52,7 +52,7 @@ public class LainController {
 	}
 	
 	@PutMapping("/lains/{id}")
-	public ResponseEntity<Lain> updateLain(@PathVariable(value="id") Integer id
+	public ResponseEntity<Lain> updateLain(@PathVariable(value="id") Long id
 			, @Valid @RequestBody Lain lainDetails){
 		Lain lain = lainDAO.findOne(id);
 		if(lain==null) {
