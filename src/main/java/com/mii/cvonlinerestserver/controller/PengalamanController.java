@@ -1,7 +1,7 @@
 package com.mii.cvonlinerestserver.controller;
 
-import com.mii.cvonlinerestserver.dao.BahasaDAO;
-import com.mii.cvonlinerestserver.models.Bahasa;
+import com.mii.cvonlinerestserver.dao.PengalamanDAO;
+import com.mii.cvonlinerestserver.models.Pengalamankerja;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,52 +23,62 @@ import org.springframework.web.bind.annotation.RestController;
 public class PengalamanController {
 	
 	@Autowired
-	BahasaDAO bahasaDAO;
+	PengalamanDAO pengalamanDAO;
 	
-	@PostMapping("/bahasa")
-	  public Bahasa createBahasa(@Valid @RequestBody Bahasa bahasa) {
-	    return bahasaDAO.save(bahasa);
+	@PostMapping("/pengalaman")
+	  public Pengalamankerja createPengalaman(@Valid @RequestBody Pengalamankerja pengalaman) {
+	    return pengalamanDAO.save(pengalaman);
 	  }
 	  
-	  @GetMapping("/bahasa")
-	  public List<Bahasa> getAll(){
-	    return bahasaDAO.findAll();
+	  @GetMapping("/pengalaman")
+	  public List<Pengalamankerja> getAll(){
+	    return pengalamanDAO.findAll();
 	  }
 	  
-	  @GetMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> getBahasaById(@PathVariable(value="id") Integer id){
-	    Bahasa bahasa = bahasaDAO.findOne(id);
+	  @GetMapping("/pengalaman/{id}")
+	  public ResponseEntity<Pengalamankerja> getPengalamanById(@PathVariable(value="id") Long id){
+	    Pengalamankerja pengalaman = pengalamanDAO.findOne(id);
 	    
-	    if(bahasa==null) {
+	    if(pengalaman==null) {
 	      return ResponseEntity.notFound().build();
 	    }
-	    return ResponseEntity.ok().body(bahasa);
+	    return ResponseEntity.ok().body(pengalaman);
 	  }
 	
-	@PutMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> updateBahasa(@PathVariable(value="id") Integer id
-	      , @Valid @RequestBody Bahasa bahasaDetails){
-	    Bahasa bahasa = bahasaDAO.findOne(id);
-	    if(bahasa==null) {
+	@PutMapping("/pengalaman/{id}")
+	  public ResponseEntity<Pengalamankerja> updatePengalaman(@PathVariable(value="id") Long id
+	      , @Valid @RequestBody Pengalamankerja pengalamanDetails){
+	    Pengalamankerja pengalaman = pengalamanDAO.findOne(id);
+	    if(pengalaman==null) {
 	      return ResponseEntity.notFound().build();
 	    }
 	    
-	    bahasa.setNamaBahasa(bahasaDetails.getNamaBahasa());
-	    bahasa.setSpeaking(bahasaDetails.getSpeaking());
-	    bahasa.setReading(bahasaDetails.getReading());
-	    bahasa.setWriting(bahasaDetails.getWriting());
+	    pengalaman.setNamaPt(pengalamanDetails.getNamaPt());
+	    pengalaman.setBidang(pengalamanDetails.getBidang());
+	    pengalaman.setAlamat(pengalamanDetails.getAlamat());
+	    pengalaman.setTelepon(pengalamanDetails.getTelepon());
+	    pengalaman.setTglAwal(pengalamanDetails.getTglAwal());
+	    pengalaman.setTglAkhir(pengalamanDetails.getTglAkhir());
+	    pengalaman.setTglAkhir(pengalamanDetails.getTglAkhir());
+	    pengalaman.setPosisi(pengalamanDetails.getPosisi());
+	    pengalaman.setGaji(pengalamanDetails.getGaji());
+	    pengalaman.setJenisGaji(pengalamanDetails.getJenisGaji());
+	    pengalaman.setProyek(pengalamanDetails.getProyek());
+	    pengalaman.setNamaAtasan(pengalamanDetails.getNamaAtasan());
+	    pengalaman.setAlasan(pengalamanDetails.getAlasan());
+	    pengalaman.setUraianJabatan(pengalamanDetails.getUraianJabatan());
 
-	    Bahasa bahasaUpdate =  bahasaDAO.save(bahasa);
-	    return ResponseEntity.ok().body(bahasaUpdate);
+	    Pengalamankerja pengalamanUpdate =  pengalamanDAO.save(pengalaman);
+	    return ResponseEntity.ok().body(pengalamanUpdate);
 	  }
 	  
-	  @DeleteMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> deleteBahasa(@PathVariable(value="id") Integer id){
-		Bahasa bahasa = bahasaDAO.findOne(id);
-		if(bahasa==null) {
+	  @DeleteMapping("/pengalaman/{id}")
+	  public ResponseEntity<Pengalamankerja> deletePengalaman(@PathVariable(value="id") Long id){
+		Pengalamankerja pengalaman = pengalamanDAO.findOne(id);
+		if(pengalaman==null) {
 			return ResponseEntity.notFound().build();
 		}
-		bahasaDAO.delete(bahasa);
+		pengalamanDAO.delete(pengalaman);
 		return ResponseEntity.ok().build();
 	  }
 	

@@ -1,8 +1,6 @@
 package com.mii.cvonlinerestserver.controller;
 
-import com.mii.cvonlinerestserver.dao.BahasaDAO;
 import com.mii.cvonlinerestserver.dao.PendidikanDAO;
-import com.mii.cvonlinerestserver.models.Bahasa;
 import com.mii.cvonlinerestserver.models.Pendidikan;
 import java.util.List;
 

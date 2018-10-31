@@ -26,7 +26,7 @@ public class ReferensiDAO {
 		return referensiRepository.findAll();
 	}
 	
-	public Referensi findOne(Integer id) {
+	public Referensi findOne(Long id) {
 		return referensiRepository.findOne(id);
 	}
 	

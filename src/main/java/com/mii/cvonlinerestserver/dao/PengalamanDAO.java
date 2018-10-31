@@ -26,7 +26,7 @@ public class PengalamanDAO {
 		return pengalamanRepository.findAll();
 	}
 	
-	public Pengalamankerja findOne(Integer id) {
+	public Pengalamankerja findOne(Long id) {
 		return pengalamanRepository.findOne(id);
 	}
 	

@@ -26,7 +26,7 @@ public class PelatihanDAO {
 		return pelatihanRepository.findAll();
 	}
 	
-	public Pelatihan findOne(Integer id) {
+	public Pelatihan findOne(Long id) {
 		return pelatihanRepository.findOne(id);
 	}
 	

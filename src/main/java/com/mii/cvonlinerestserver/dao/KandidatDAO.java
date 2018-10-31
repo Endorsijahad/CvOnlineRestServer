@@ -26,7 +26,7 @@ public class KandidatDAO {
 		return kandidatRepository.findAll();
 	}
 	
-	public Kandidat findOne(Integer id) {
+	public Kandidat findOne(Long id) {
 		return kandidatRepository.findOne(id);
 	}
 	

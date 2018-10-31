@@ -1,7 +1,7 @@
 package com.mii.cvonlinerestserver.controller;
 
-import com.mii.cvonlinerestserver.dao.BahasaDAO;
-import com.mii.cvonlinerestserver.models.Bahasa;
+import com.mii.cvonlinerestserver.dao.ReferensiDAO;
+import com.mii.cvonlinerestserver.models.Referensi;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,52 +23,54 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReferensiController {
 	
 	@Autowired
-	BahasaDAO bahasaDAO;
+	ReferensiDAO referensiDAO;
 	
-	@PostMapping("/bahasa")
-	  public Bahasa createBahasa(@Valid @RequestBody Bahasa bahasa) {
-	    return bahasaDAO.save(bahasa);
+	@PostMapping("/referensi")
+	  public Referensi createReferensi(@Valid @RequestBody Referensi referensi) {
+	    return referensiDAO.save(referensi);
 	  }
 	  
-	  @GetMapping("/bahasa")
-	  public List<Bahasa> getAll(){
-	    return bahasaDAO.findAll();
+	  @GetMapping("/referensi")
+	  public List<Referensi> getAll(){
+	    return referensiDAO.findAll();
 	  }
 	  
-	  @GetMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> getBahasaById(@PathVariable(value="id") Integer id){
-	    Bahasa bahasa = bahasaDAO.findOne(id);
+	  @GetMapping("/referensi/{id}")
+	  public ResponseEntity<Referensi> getReferensiById(@PathVariable(value="id") Long id){
+	    Referensi referensi = referensiDAO.findOne(id);
 	    
-	    if(bahasa==null) {
+	    if(referensi==null) {
 	      return ResponseEntity.notFound().build();
 	    }
-	    return ResponseEntity.ok().body(bahasa);
+	    return ResponseEntity.ok().body(referensi);
 	  }
 	
-	@PutMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> updateBahasa(@PathVariable(value="id") Integer id
-	      , @Valid @RequestBody Bahasa bahasaDetails){
-	    Bahasa bahasa = bahasaDAO.findOne(id);
-	    if(bahasa==null) {
+	@PutMapping("/referensi/{id}")
+	  public ResponseEntity<Referensi> updateReferensi(@PathVariable(value="id") Long id
+	      , @Valid @RequestBody Referensi referensiDetails){
+	    Referensi referensi = referensiDAO.findOne(id);
+	    if(referensi==null) {
 	      return ResponseEntity.notFound().build();
 	    }
 	    
-	    bahasa.setNamaBahasa(bahasaDetails.getNamaBahasa());
-	    bahasa.setSpeaking(bahasaDetails.getSpeaking());
-	    bahasa.setReading(bahasaDetails.getReading());
-	    bahasa.setWriting(bahasaDetails.getWriting());
+	    referensi.setNama(referensiDetails.getNama());
+	    referensi.setNoHp(referensiDetails.getNoHp());
+	    referensi.setEmail(referensiDetails.getEmail());
+	    referensi.setLamaKenal(referensiDetails.getLamaKenal());
+	    referensi.setKonfirmasi(referensiDetails.getKonfirmasi());
+	    referensi.setAlamat(referensiDetails.getAlamat());
 
-	    Bahasa bahasaUpdate =  bahasaDAO.save(bahasa);
-	    return ResponseEntity.ok().body(bahasaUpdate);
+	    Referensi referensiUpdate =  referensiDAO.save(referensi);
+	    return ResponseEntity.ok().body(referensiUpdate);
 	  }
 	  
-	  @DeleteMapping("/bahasa/{id}")
-	  public ResponseEntity<Bahasa> deleteBahasa(@PathVariable(value="id") Integer id){
-		Bahasa bahasa = bahasaDAO.findOne(id);
-		if(bahasa==null) {
+	  @DeleteMapping("/referensi/{id}")
+	  public ResponseEntity<Referensi> deleteReferensi(@PathVariable(value="id") Long id){
+		Referensi referensi = referensiDAO.findOne(id);
+		if(referensi==null) {
 			return ResponseEntity.notFound().build();
 		}
-		bahasaDAO.delete(bahasa);
+		referensiDAO.delete(referensi);
 		return ResponseEntity.ok().build();
 	  }
 	
